@@ -17,25 +17,26 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class MainController {
 
 	@Autowired
-	CheckUpRepo checkuprepo;
+	private CheckUpRepo checkuprepo;
 	@Autowired
-	CustomerRepo customerrepo;
+	private CustomerRepo customerrepo;
 	@Autowired
-	EquipmentsRepo equipmentrepo;
+	private EquipmentsRepo equipmentrepo;
 	@Autowired
-	TreatmentsRepo treatmentrepo;
+	private TreatmentsRepo treatmentrepo;
 	@Autowired
-	MedicinesRepo medicinerepo;
+	private MedicinesRepo medicinerepo;
 
-	@RequestMapping(value = "/customer", method = RequestMethod.POST)
-	public ResponseEntity<Object> createCustomer(@RequestBody Customer cmp) {
-
-		customerrepo.save(cmp);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cmp.getId())
-				.toUri();
-
-		return ResponseEntity.created(location).build();
-	}
+	/*
+	 * @RequestMapping(value = "/customer", method = RequestMethod.POST) public
+	 * ResponseEntity<Object> createCustomer(@RequestBody Customer cmp) {
+	 * 
+	 * customerrepo.save(cmp); URI location =
+	 * ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand
+	 * (cmp.getId()) .toUri();
+	 * 
+	 * return ResponseEntity.created(location).build(); }
+	 */
 
 
 	@PostMapping("/customers")
@@ -58,10 +59,34 @@ public class MainController {
 		return treatmentrepo.save(newTreatment);
 	}
 	
-	@PostMapping("/checkup")
-	CheckUp newCheckup(@RequestBody CheckUp newCheckup) {
-		return checkuprepo.save(newCheckup);
+//	@PostMapping("/checkup")
+//	CheckUp newCheckup(@RequestBody CheckUp newCheckup) {
+//		return checkuprepo.save(newCheckup);
+//	}
+//	
+	
+	@RequestMapping(value = "/checkup", method = RequestMethod.POST)
+	public ResponseEntity<Object> createCustomer(@RequestBody CheckUp cmp) {
+		System.out.println("----------------------------------------------------------------"+cmp.getQuantity());
+		System.out.println("----------------------------------------------------------------"+cmp.toString());
+		
+		CheckUp testCheckUp = new CheckUp();
+		testCheckUp.setCheckInDate(cmp.getCheckInDate());
+		testCheckUp.setComplaints(cmp.getComplaints());
+		testCheckUp.setFindings(cmp.getFindings());
+		testCheckUp.setQuantity(cmp.getQuantity());
+		Customer se = customerrepo.findByCustomerName(cmp.patientsID);
+		
+		System.out.println("----------------------------------------------------------------"+se);
+		testCheckUp.setPatients(se);
+
+		checkuprepo.save(testCheckUp);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cmp.getId())
+				.toUri();
+
+		return ResponseEntity.created(location).build();
 	}
+
 
 	
 	
