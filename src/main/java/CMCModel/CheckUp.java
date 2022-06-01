@@ -103,10 +103,38 @@ public class CheckUp {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Customer patients;
-
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private Equipments equipments;
+	
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private Medicines medicines;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private Treatments treatments;
+	
+	public Treatments getTreatments() {
+		return treatments;
+	}
+
+	public void setTreatments(Treatments treatments) {
+		this.treatments = treatments;
+	}
+
 	@Transient
 	public Long patientsID;
+
+	public Medicines getMedicines() {
+		return medicines;
+	}
+
+	public void setMedicines(Medicines medicines) {
+		this.medicines = medicines;
+	}
 
 	public Long getPatientsID() {
 		return patientsID;
@@ -114,6 +142,46 @@ public class CheckUp {
 
 	public void setPatientsID(Long patientsID) {
 		this.patientsID = patientsID;
+	}
+	
+	
+	@Transient
+	public Long equipmentsID;
+	@Transient
+	public Object medicinesID;
+	@Transient
+	public Object treatmentID;
+
+	public Object getTreatmentID() {
+		return treatmentID;
+	}
+
+	public void setTreatmentID(Object treatmentID) {
+		this.treatmentID = treatmentID;
+	}
+
+	public Object getMedicinesID() {
+		return medicinesID;
+	}
+
+	public void setMedicinesID(Object medicinesID) {
+		this.medicinesID = medicinesID;
+	}
+
+	public Equipments getEquipments() {
+		return equipments;
+	}
+
+	public void setEquipments(Equipments equipments) {
+		this.equipments = equipments;
+	}
+
+	public Long getEquipmentsID() {
+		return equipmentsID;
+	}
+
+	public void setEquipmentsID(Long equipmentsID) {
+		this.equipmentsID = equipmentsID;
 	}
 
 	

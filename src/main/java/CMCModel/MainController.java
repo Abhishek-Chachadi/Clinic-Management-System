@@ -76,16 +76,23 @@ public class MainController {
 		testCheckUp.setFindings(cmp.getFindings());
 		testCheckUp.setQuantity(cmp.getQuantity());
 		Customer se = customerrepo.findByCustomerName(cmp.patientsID);
-		
+		Equipments eq = equipmentrepo.findByEquipmentID(cmp.equipmentsID);
+		Medicines drugs = medicinerepo.findByMedicineID(cmp.medicinesID);
+		Treatments treat = treatmentrepo.findByTreatmentID(cmp.treatmentID);
 		System.out.println("----------------------------------------------------------------"+se);
 		testCheckUp.setPatients(se);
-
+		testCheckUp.setEquipments(eq);
+		testCheckUp.setMedicines(drugs);
+		testCheckUp.setTreatments(treat);
 		checkuprepo.save(testCheckUp);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cmp.getId())
 				.toUri();
 
 		return ResponseEntity.created(location).build();
 	}
+	
+	
+	
 
 
 	

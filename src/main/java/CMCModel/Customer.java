@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -42,18 +43,23 @@ public class Customer {
 	private Long id;
 
 	@Column(nullable = false)
+	@JsonFormat
 	private String firstName;
 
 	@Column(nullable = false)
+	@JsonFormat
 	private String lastName;
 
 	@Column(nullable = false)
+	@JsonFormat
 	private int age;
 
 	@Column(nullable = false)
+	@JsonFormat
 	private String sex;
 
 	@Column(nullable = false)
+	@JsonFormat
 	private String address;
 	
 	@OneToMany(mappedBy = "patients",cascade={CascadeType.ALL})
