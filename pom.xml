@@ -50,6 +50,12 @@
 			<scope>test</scope>
 		</dependency>
 		
+<dependency>
+   <groupId>org.postgresql</groupId>
+   <artifactId>postgresql</artifactId>
+   <scope>runtime</scope>
+</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
 <dependency>
     <groupId>com.h2database</groupId>
